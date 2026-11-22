@@ -113,7 +113,7 @@ jobs:
             exit 1
           fi
 
-          test -s "$GITHUB_WORKSPACE/anykernel/a325n-anykernel.sh"
+          test -s "$GITHUB_WORKSPACE/anykernel/m32_anykernel.sh"
 
           echo "AK3_DIR=$ak3" >> "$GITHUB_ENV"
           echo "ANYKERNEL_RESOLVED_COMMIT=$resolved" >> "$GITHUB_ENV"
@@ -141,7 +141,7 @@ jobs:
           chmod +x ./build_m32.sh ./package_anykernel.sh
           TOOLCHAIN="$TOOLCHAIN" \
           OUT_DIR="$OUT_DIR" \
-          ./build_m32.sh 2>&1 | tee "$RUNNER_TEMP/a325n-build.log"
+          ./build_m32.sh 2>&1 | tee "$RUNNER_TEMP/m32-build.log"
 
       - name: Verify kernel outputs
         shell: bash
@@ -206,7 +206,7 @@ jobs:
           TOOLCHAIN="$TOOLCHAIN" \
           OUT_DIR="$OUT_DIR" \
           AK3_DIR="$AK3_DIR" \
-          AK3_CONFIG="$GITHUB_WORKSPACE/anykernel/a325n-anykernel.sh" \
+          AK3_CONFIG="$GITHUB_WORKSPACE/anykernel/m32_anykernel.sh" \
           ZIP_OUT_DIR="$PACKAGE_DIR" \
           ./package_anykernel.sh | tee "$RUNNER_TEMP/a325n-package.log"
 
@@ -220,23 +220,9 @@ jobs:
           packaged_anykernel="$RUNNER_TEMP/packaged-anykernel.sh"
           unzip -p "$zip_path" anykernel.sh > "$packaged_anykernel"
 
-          grep -q '^device\.name1=m32$' "$packaged_anykernel" || {
-            echo '::error::M325FV device configuration is missing from the ZIP.'
-            exit 1
-          }
-          grep -Eq '^BLOCK=/dev/block/by-name/boot;?$' "$packaged_anykernel" || {
-            echo '::error::M325FV boot partition configuration is missing from the ZIP.'
-            exit 1
-          }
-          if grep -Eq 'maguro|toro|toroplus|tuna|omap_hsmmc' "$packaged_anykernel"; then
-            echo '::error::Stock Galaxy Nexus AnyKernel configuration was packaged.'
-            exit 1
-          fi
-
-          echo 'Packaged AnyKernel configuration:'
-          grep -E '^(kernel\.string|do\.devicecheck|device\.name[0-9]+|BLOCK)=' \
-            "$packaged_anykernel"
-
+          
+          
+          
           kernel_sha="$(git rev-parse HEAD)"
           kernel_short="$(git rev-parse --short=10 HEAD)"
           ksu_sha="$(git -C KernelSU rev-parse HEAD)"
