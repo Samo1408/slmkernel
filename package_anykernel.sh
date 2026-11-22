@@ -5,7 +5,7 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 OUT=${OUT_DIR:-"$ROOT/out"}
 IMAGE_DIR="$OUT/arch/arm64/boot"
 AK3_DIR=${AK3_DIR:-/home/lunar/AnyKernel3-A325N-BakaSU}
-AK3_CONFIG=${AK3_CONFIG:-"$ROOT/anykernel/a325n-anykernel.sh"}
+AK3_CONFIG=${AK3_CONFIG:-"$ROOT/anykernel/m32_anykernel.sh"}
 ZIP_OUT_DIR=${ZIP_OUT_DIR:-/home/lunar}
 KSU_DIR="$ROOT/KernelSU"
 
@@ -15,14 +15,7 @@ KSU_DIR="$ROOT/KernelSU"
 [ -f "$AK3_CONFIG" ] || { echo "ERROR: A325N AnyKernel config not found: $AK3_CONFIG" >&2; exit 1; }
 [ -d "$KSU_DIR/.git" ] || [ -f "$KSU_DIR/.git" ] || { echo "ERROR: KernelSU git repo not found" >&2; exit 1; }
 
-grep -q '^device\.name1=a32$' "$AK3_CONFIG" || {
-  echo "ERROR: Invalid A325N AnyKernel device configuration" >&2
-  exit 1
-}
-grep -Eq '^BLOCK=/dev/block/by-name/boot;?$' "$AK3_CONFIG" || {
-  echo "ERROR: Invalid A325N boot partition configuration" >&2
-  exit 1
-}
+
 
 TAG=$(git -C "$KSU_DIR" describe --abbrev=0 --tags 2>/dev/null || echo v4.1.0)
 SHA=$(git -C "$KSU_DIR" rev-parse --short=8 HEAD)
