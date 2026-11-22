@@ -1,0 +1,4 @@
+[submodule "KernelSU"]
+	path = KernelSU
+	url = https://github.com/Samo1408/FinaSU.git
+	branch = ksu
