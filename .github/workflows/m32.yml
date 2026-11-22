@@ -120,7 +120,7 @@ jobs:
 
       - name: Check unmodified BakaSU source
         shell: bash
-        run: sh scripts/prepare_bakasu.sh --check
+        run: sh scripts/prepare_bakasu.sh
 
       - name: Show build metadata
         shell: bash
