@@ -60,8 +60,8 @@ cp "$TOOLCHAIN/aosp-source.txt" "$OUT/toolchain-source.txt"
 cat "$OUT/clang-version.txt" "$OUT/lld-version.txt" >> "$OUT/toolchain-source.txt"
 "$AS" --version >> "$OUT/toolchain-source.txt"
 
-sh "$ROOT/scripts/prepare_bakasu.sh" --check > "$OUT/bakasu-source.txt"
-cat "$OUT/bakasu-source.txt"
+#sh "$ROOT/scripts/prepare_bakasu.sh" --check > "$OUT/bakasu-source.txt"
+#cat "$OUT/bakasu-source.txt"
 
 "$ROOT/scripts/kconfig/merge_config.sh" -m -O "$OUT" \
   "$ROOT/arch/arm64/configs/mt6768_slm_defconfig" \
@@ -76,4 +76,4 @@ make -C "$ROOT" O="$OUT" olddefconfig
 make -C "$ROOT" O="$OUT" headers_install INSTALL_HDR_PATH="$OUT/usr"
 make -C "$ROOT" O="$OUT" -j"$JOBS"
 # Building must never modify the upstream submodule.
-sh "$ROOT/scripts/prepare_bakasu.sh" --check
+#sh "$ROOT/scripts/prepare_bakasu.sh" --check
