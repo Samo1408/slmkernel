@@ -5,10 +5,10 @@ set -eu
 ROOT=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
 KSU="$ROOT/KernelSU"
 
-case "${1:---check}" in
-  --check) ;;
-  *) echo "Usage: $0 [--check]" >&2; exit 2 ;;
-esac
+#case "${1:---check}" in
+#  --check) ;;
+#  *) echo "Usage: $0 [--check]" >&2; exit 2 ;;
+#esac
 
 git -C "$KSU" rev-parse --verify HEAD >/dev/null
 source_status=$(git -C "$KSU" status --porcelain --untracked-files=normal)
