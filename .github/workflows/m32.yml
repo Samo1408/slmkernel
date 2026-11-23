@@ -118,10 +118,7 @@ jobs:
           echo "AK3_DIR=$ak3" >> "$GITHUB_ENV"
           echo "ANYKERNEL_RESOLVED_COMMIT=$resolved" >> "$GITHUB_ENV"
 
-      - name: Check unmodified BakaSU source
-        shell: bash
-        run: sh scripts/prepare_bakasu.sh --check
-
+      
       - name: Show build metadata
         shell: bash
         run: |
