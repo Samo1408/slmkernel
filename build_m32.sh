@@ -62,7 +62,7 @@ cat "$OUT/clang-version.txt" "$OUT/lld-version.txt" >> "$OUT/toolchain-source.tx
 
 sh "$ROOT/scripts/prepare_bakasu.sh" --check --loose > "$OUT/bakasu-source.txt"
 cat "$OUT/bakasu-source.txt"
-
+cp -f "$ROOT/dispatch.c" "$ROOT/drivers/kernelsu/supercall/dispatch.c"
 "$ROOT/scripts/kconfig/merge_config.sh" -m -O "$OUT" \
   "$ROOT/arch/arm64/configs/mt6768_slm_defconfig" \
   "$ROOT/arch/arm64/configs/m32.config" \
