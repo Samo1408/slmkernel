@@ -47,7 +47,7 @@ include $(kbuild-file)
 # Keep BakaSU's upstream sources unchanged; adapt only this built-in SUSFS build.
 ifeq ($(CONFIG_KSU_SUSFS),y)
 ifeq ($(obj),drivers/kernelsu)
-include $(srctree)/scripts/bakasu_preinit.mk
+# include $(srctree)/scripts/bakasu_preinit.mk
 endif
 endif
 
