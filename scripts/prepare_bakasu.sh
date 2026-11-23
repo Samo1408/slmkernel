@@ -41,12 +41,12 @@ for hook in susfs_sel_write_context susfs_sel_write_access initialize_fake_statu
 done
 grep -q 'ksu_selinux_hide_running' "$ROOT/security/selinux/hooks.c"
 grep -q 'KSU_COMPAT_HAS_SUSFS_FEATURE_SELINUX_HIDE' "$KSU/kernel/tools/susfs_compat.mk"
-grep -q '#define __maybe_static$' "$KSU/kernel/feature/selinux_hide.c"
+grep -q '#define __maybe_static$' "$KSU/kernel/feature/selinux_hide/selinux_hide.c"
 grep -q 'int ksu_handle_sys_read(unsigned int fd, char __user \*\*buf_ptr, size_t \*count_ptr)' \
   "$KSU/kernel/runtime/ksud_integration.c"
 grep -q 'KSU_INSTALL_MAGIC1, 0xDEADBEEF' "$KSU/kernel/include/uapi/supercall.h"
 for api in my_write_context my_write_access my_setprocattr initialize_fake_status; do
-  grep -q "$api" "$KSU/kernel/feature/selinux_hide.c"
+  grep -q "$api" "$KSU/kernel/feature/selinux_hide/selinux_hide.c"
 done
 if grep -qE 'CMD_SUSFS_SET_PRIORITY_UID_FILTER|susfs_parse_priority_app_strings' \
   "$KSU/kernel/supercall/dispatch.c" "$KSU/kernel/manager/pkg_observer.c"; then
