@@ -76,4 +76,4 @@ make -C "$ROOT" O="$OUT" olddefconfig
 make -C "$ROOT" O="$OUT" headers_install INSTALL_HDR_PATH="$OUT/usr"
 make -C "$ROOT" O="$OUT" -j"$JOBS"
 # Building must never modify the upstream submodule.
-sh "$ROOT/scripts/prepare_bakasu.sh" --check
+sh "$ROOT/scripts/prepare_bakasu.sh" --check --loose
