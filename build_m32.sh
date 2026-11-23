@@ -60,7 +60,7 @@ cp "$TOOLCHAIN/aosp-source.txt" "$OUT/toolchain-source.txt"
 cat "$OUT/clang-version.txt" "$OUT/lld-version.txt" >> "$OUT/toolchain-source.txt"
 "$AS" --version >> "$OUT/toolchain-source.txt"
 
-sh "$ROOT/scripts/prepare_bakasu.sh" --check > "$OUT/bakasu-source.txt"
+sh "$ROOT/scripts/prepare_bakasu.sh" --check --loose > "$OUT/bakasu-source.txt"
 cat "$OUT/bakasu-source.txt"
 
 "$ROOT/scripts/kconfig/merge_config.sh" -m -O "$OUT" \
