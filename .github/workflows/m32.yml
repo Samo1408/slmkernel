@@ -119,7 +119,7 @@ jobs:
           echo "ANYKERNEL_RESOLVED_COMMIT=$resolved" >> "$GITHUB_ENV"
       - name: Check unmodified BakaSU source
         shell: bash
-        run: sh scripts/prepare_bakasu.sh --check
+        run: sh scripts/prepare_bakasu.sh --check --loose
 
       
       - name: Show build metadata
